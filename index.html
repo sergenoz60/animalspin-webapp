@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimalSpin - Çark Çevirme Oyunu</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            margin: 50px auto;
+        }
+        .wheel {
+            width: 100%;
+            transition: transform 4s ease-out;
+        }
+        .spin-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: orange;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .menu {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .menu button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎡 AnimalSpin'e Hoş Geldin!</h1>
+    <p>Çarkı çevir ve şansını dene!</p>
+    <div class="wheel-container">
+        <img id="wheel" class="wheel" src="wheel.png" alt="Çark">
+    </div>
+    <button class="spin-button" onclick="spinWheel()">Çarkı Çevir</button>
+    <h2 id="result"></h2>
+    <audio id="spinSound" src="https://www.fesliyanstudios.com/play-mp3/4385"></audio>
+    
+    <div class="menu">
+        <button onclick="window.location.href='index.html'">Ana Sayfa</button>
+        <button onclick="window.open('friends.html', '_blank')">Arkadaşlar</button>
+        <button onclick="window.open('leaderboard.html', '_blank')">Liderlik Tablosu</button>
+    </div>
+    
+    <script>
+        let spinsLeft = 10;
+        document.getElementById("result").innerText = `Kalan Çark Hakkın: ${spinsLeft}`;
+
+        function spinWheel() {
+            if (spinsLeft <= 0) {
+                alert("Çark hakkın bitti!");
+                return;
+            }
+            spinsLeft--;
+            document.getElementById("result").innerText = `Kalan Çark Hakkın: ${spinsLeft}`;
+
+            let spinDegrees = Math.floor(Math.random() * 3600) + 1800;
+            document.getElementById("wheel").style.transform = `rotate(${spinDegrees}deg)`;
+            document.getElementById("spinSound").play();
+            
+            setTimeout(() => {
+                let points = [100, 150, 200, 250, 300, 350, 500, 1000, 2500, 5000, 7500, 10000];
+                let weights = [15, 15, 15, 15, 10, 10, 7, 5, 4, 2, 1, 1];
+                
+                let totalWeight = weights.reduce((a, b) => a + b, 0);
+                let randomNum = Math.random() * totalWeight;
+                let sum = 0;
+                let randomPoints = 100;
+
+                for (let i = 0; i < points.length; i++) {
+                    sum += weights[i];
+                    if (randomNum <= sum) {
+                        randomPoints = points[i];
+                        break;
+                    }
+                }
+                
+                document.getElementById("result").innerText = `Kazandığın Puan: ${randomPoints}`;
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
