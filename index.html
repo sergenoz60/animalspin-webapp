@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimalSpin - Amazon Macerası</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: url('https://sergenoz60.github.io/animalspin-webapp/wheel.png') no-repeat center center fixed;
+            background-size: cover;
+            animation: backgroundMove 10s infinite alternate ease-in-out;
+        }
+        
+        @keyframes backgroundMove {
+            0% { background-position: center top; }
+            100% { background-position: center bottom; }
+        }
+        
+        .tree {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 300px;
+            background: url('tree.png') no-repeat center center;
+            background-size: contain;
+            animation: sway 3s infinite alternate ease-in-out;
+        }
+        
+        @keyframes sway {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
+        }
+        
+        .monkey {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 50px;
+            height: 50px;
+            background: url('monkey.png') no-repeat center center;
+            background-size: contain;
+            animation: monkeyMove 5s infinite alternate ease-in-out;
+        }
+        
+        @keyframes monkeyMove {
+            0% { left: 50px; }
+            100% { left: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="tropik_ses.mp3" type="audio/mpeg">
+    </audio>
+    <div class="tree"></div>
+    <div class="monkey"></div>
+    <button onclick="spinWheel()">Çarkı Çevir</button>
+    <script>
+        function spinWheel() {
+            alert("Çark döndü!");
+        }
+    </script>
+</body>
+</html>
