@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkadaşlar - AnimalSpin</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>👥 Arkadaşlar</h1>
+    <div class="container">
+        <p>Referans kazançlarını burada görebilirsin.</p>
+        <p><strong>Referans Başına:</strong> 1000 Puan</p>
+        <p><strong>Referans Kazanç Komisyonu:</strong> %5</p>
+        <div id="user-info">Kullanıcı bilgileri yükleniyor...</div>
+        <h3>Referans Kazançları</h3>
+        <ul id="referral-list">
+            <li>Yükleniyor...</li>
+        </ul>
+    </div>
+    <button class="back-button" onclick="window.close()">Kapat</button>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                let user = tg.initDataUnsafe.user;
+                document.getElementById("user-info").innerHTML = `<p><strong>Kullanıcı:</strong> ${user.first_name}</p>`;
+            } else {
+                document.getElementById("user-info").innerHTML = "Telegram kullanıcı bilgileri alınamadı.";
+            }
+
+            let referrals = JSON.parse(localStorage.getItem("referrals")) || [];
+            let listElement = document.getElementById("referral-list");
+            listElement.innerHTML = "";
+
+            referrals.forEach(ref => {
+                let li = document.createElement("li");
+                li.textContent = `${ref.username} - ${ref.points} Puan kazandı`;
+                listElement.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
