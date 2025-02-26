@@ -34,7 +34,7 @@
     <h1>🎡 AnimalSpin'e Hoş Geldin!</h1>
     <p>Çarkı çevir ve şansını dene!</p>
     <div class="wheel-container">
-        <img id="wheel" class="wheel" src="https://i.imgur.com/jNWeP1z.png" alt="Çark">
+        <img id="wheel" class="wheel" src="https://i.imgur.com/6zj5xov.png" alt="Çark">
     </div>
     <button class="spin-button" onclick="spinWheel()">Çarkı Çevir</button>
     <h2 id="result"></h2>
@@ -46,7 +46,7 @@
             document.getElementById("spinSound").play();
             
             setTimeout(() => {
-                let points = [100, 100, 100, 500, 500, 1000, 1000, 2500, 5000, 10000]; // Düşük puanlar ağırlıklı
+                let points = [50, 100, 100, 100, 500, 500, 500, 1000, 1000, 2500, 5000, 10000]; // Daha düşük puan ağırlıklı
                 let randomPoints = points[Math.floor(Math.random() * points.length)];
                 document.getElementById("result").innerText = `Kazandığın Puan: ${randomPoints}`;
             }, 4000);
